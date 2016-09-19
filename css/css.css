@@ -1,0 +1,119 @@
+﻿.bowl-logo
+{
+    left: 33%;
+    position: absolute;
+    top: 13%;
+    width: 30%;
+    z-index: 1;
+}
+.login-share-ex i.icon
+{
+    background: url("../images/zhuo-icon-3.png") no-repeat;
+    background-size: 25px 20px;
+    display: inline-block;
+    height: 26px;
+    margin: 0 5px;
+    vertical-align: -9px;
+    width: 32px;
+}
+.bobing-num.ulib-r30.login-share.login-share-ex > span
+{
+}
+.bobing-num
+{
+    background-color: #fff;
+    border: 1px solid #fdb08e;
+    font-size: 1.4rem;
+    margin: 1% 8% 0;
+    padding: 4% 0;
+    text-align: center;
+}
+dl.wap-list-1 dd li:first-child
+{
+    margin-right: 0;
+    width: 20%;
+}
+dl.wap-list-1 dd li:last-child
+{
+    width: 80%;
+}
+dl.wap-list-1 dd li:first-child
+{
+    margin-right: 0;
+    width: 10%;
+}
+dl.wap-list-1 dd li
+{
+    float: left;
+    width: 20%;
+}
+dl.wap-list-1 dd li:last-child
+{
+    width: 70%;
+}
+dl.wap-list-1 dd li img
+{
+    width: 200px;
+}
+.page-prize-list li
+{
+    padding: 8px 0px;
+    display: block;
+    clear: both;
+}
+.page-prize-list .prize-num
+{
+    float: right;
+}
+.zhuo-winning table thead
+{
+    background: #aa1004;
+    color: white;
+}
+.zhuo-winning table thead th, table td
+{
+    vertical-align: middle;
+    text-align: center;
+    height: 33px;
+}
+input.text
+{
+    width: 100%;
+    height: 26px;
+    margin-top: 5px;
+}
+.bobing-num > div
+{
+    padding: 0px 25px;
+}
+button.submit
+{
+    border-width: 0px;
+    border-radius: 5Wpx;
+    width: 100%;
+    height: 30px;
+    background: #aa1004;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+.alertify-button-ok, .alertify-button-ok:hover, .alertify-button-ok:focus, .alertify-button-ok:active
+{
+    text-shadow: 0 -1px 0 #aa1004;
+    background-color: #aa1004;
+    border: 1px solid #aa1004;
+    border-color: #aa1004;
+    border-color: #aa1004;
+    color: #FFF;
+}
+.bobing-num input[type="text"]
+{
+    border-radius: 0 !important;
+    border-width: 1px;
+    background-color: #fff;
+    border-color: #d5d5d5;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}

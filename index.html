@@ -1,0 +1,342 @@
+﻿<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Cache-Control" content="no-cache"/>
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="MobileOptimized" content="320"/>
+    <title>中秋博饼</title>
+    <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="css/css.css"/>
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+</head>
+<body class="yahei">
+    <section>
+        <div class="bobing-panel">
+            <div class="bowl-wrap">
+                <div class="w-wrap">
+                    <div class="result ulib-r30 clear">
+                        <div class="icon">
+                            <img width="100%" alt=""/>
+                        </div>
+                        <div class="result-tx">
+                        </div>
+                    </div>
+                </div>
+                <audio id="yao" src="yao.wav" preload="preload">
+                </audio>
+                <div class="bowl" id="yao_saizi">
+                    <img src="images/bowl.png" alt=""/>
+                    <em class="dice dice1">
+                        <img src="images/dice1.png" alt=""/></em> <em class="dice dice2" style="top: 45%;
+                            left: 55%;">
+                            <img src="images/dice2.png" alt=""/></em> <em class="dice dice3" style="top: 54%;
+                                left: 45%;">
+                                <img src="images/dice3.png" alt=""/></em> <em class="dice dice4" style="top: 41%;
+                                    left: 40%;">
+                                    <img src="images/dice4.png" alt=""/></em> <em class="dice dice5" style="top: 58%;
+                                        left: 60%;">
+                                        <img src="images/dice5.png" alt=""/></em> <em class="dice dice6" style="top: 62%;
+                                            left: 35%;">
+                                            <img src="images/dice6.png" alt=""/></em> <span class="bowl-logo">
+                                                <img alt="企业LOGO" src="images/wandi.png"/></span>
+                </div>
+                <div class="bobing-num ulib-r30">
+<!--                    <div id="div-info">
+                        <p>
+                            <input class="info-name text" type="text" placeholder="请输入姓名" id="name" maxlength="10"></p>
+                        <p>
+                            <input class="info-tel text" type="text" placeholder="请输入手机号码" id="tel" maxlength="11"></p>
+                        <div class="report-tip" style="color: red;">
+                            <span>*</span>请填写真实信息，凭此信息方可领奖</div>
+                        <button class="submit">
+                            立即参与</button>
+                    </div>-->
+                    <span><i class="icon"></i>【今天还剩<b id="count">10</b>次博饼机会】 </span>
+                </div>
+<!--                <div class="bobing-num ulib-r30 login-share login-share-ex">
+                    <i class="icon"></i><span>邀请好友参与</span>
+                </div>-->
+            </div>
+        </div>
+        <div class="w-wrap">
+            <div class="zhuo-winning">
+                <dl>
+                    <dt style="border-bottom: none; text-align: center;">已博<em id="times">0</em>次，当前总积分:<em
+                        id="credits">0</em></dt>
+                </dl>
+            </div>
+        </div>
+        <div class="w-wrap">
+            <div class="zhuo-winning">
+                <dl>
+                    <dt><strong>活动说明</strong> </dt>
+                    <dd class="clear">
+                        <p>
+                            起源于泉州的中秋博饼，是闽南人数百年特有的中秋活动。</p>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="w-wrap">
+            <div class="zhuo-winning">
+                <dl>
+                    <dt><strong>活动规则</strong> </dt>
+                    <dd class="clear">
+                        <p>
+                            状元插金花（四个4二个1）：100分<br/>
+                            状元红六勃（六个4）：90分<br/>
+                            状元遍地锦（六个1）：85分<br/>
+                            状元黑六勃（六个2、3、5、6）：80分<br/>
+                            状元五红（五个4）：75分<br/>
+                            状元五子（五个除4以外的数）：70分<br/>
+                            状元四红（四个4）：64分<br/>
+                            榜眼（1~6各一个）：32分<br/>
+                            三红（三个4）：16分<br/>
+                            四进（四个除4以外的数）：8分<br/>
+                            二举（两个4）：4分<br/>
+                            一秀（一个4）：2分
+                        </p>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="w-wrap">
+            <div class="zhuo-winning">
+                <dl>
+                    <dt><strong>奖品列表</strong> </dt>
+                    <dd class="clear">
+                        <p id="prize">
+                        </p>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </section>
+    <div id="mask" style="position: fixed; z-index: 999998; top: 0; left: 0; height: 100%;
+        width: 100%; background: black; opacity: 0.7; display: none;">
+    </div>
+    <img id="guide" alt="" style="position: fixed; z-index: 999999; top: 0; right: 0; display: none;"
+        src="images/guide.png"/>
+    <script type="text/javascript">
+        //预加载图片
+        var $fdImg = $('<img>');
+        $fdImg.attr('src', 'images/fd.png');
+        function getfmNum(num) {
+            if (num < 10) {
+                return '0' + num;
+            }
+            return num;
+        }
+
+        //奖项
+        var prize = [
+	        { "title": "秀才", "name": "一秀", "score": "2" },
+	        { "title": "举人", "name": "二举", "score": "4" },
+	        { "title": "进士", "name": "四进", "score": "8" },
+	        { "title": "探花", "name": "三红", "score": "16" },
+	        { "title": "榜眼", "name": "对堂", "score": "32" },
+	        { "title": "状元", "name": "四红", "score": "64" },
+	        { "title": "状元", "name": "五子", "score": "70" },
+	        { "title": "状元", "name": "五红", "score": "75" },
+	        { "title": "状元", "name": "黑六勃", "score": "80" },
+	        { "title": "状元", "name": "遍地锦", "score": "85" },
+	        { "title": "状元", "name": "红六勃", "score": "90" },
+	        { "title": "状元", "name": "插金花", "score": "100" }
+        ];
+
+
+        //摇奖结果点数显示
+        function setDice(result) {
+            if (result != "") {
+                var point;
+                for (var i = 0; i < 6; i++) {
+                    point = result.substr(i, 1);
+                    $('.dice' + [i + 1]).children('img').attr('src', 'images/dice' + point + '.png');
+                }
+            }
+            //flag = 0;
+        }
+
+        //摇骰子入口
+        var flag = 0;
+        var over = 0;
+        var audio = document.getElementById('yao');
+        function yaoshaizi() {
+            $('.result').hide();
+            if ($('b#count').html() <= 0) {
+                $('.result').show();
+                $('.result').find('.icon').children('img').attr('src', 'images/fd.png');
+                $('.result-tx').html("您的参与次数已用完");
+                return;
+            }
+            if (flag == 1) return;
+            flag = 1;
+
+            //随机产生6位数字
+            var result = "";
+            var point_Array = new Array();
+            for (var i = 0; i < 6; i++) {
+                var point = Math.ceil(Math.random() * 6);
+                point_Array[i] = point;
+                result += point;
+            }
+            var point_Str = "";
+            var prize_I = 0;
+            var prize_Title="";
+            var prize_Name = "";
+            var prize_Score = "";
+            
+            point_Array.sort();
+            point_Str = point_Array.join("");
+            
+            if (point_Str == "114444") {
+                prize_I = 11; //插金花
+            }
+            else if (point_Str == "444444") {
+                prize_I = 10; //红六勃
+            }
+            else if (point_Str == "111111") {
+                prize_I = 9; //遍地锦
+            }
+            else if (point_Str == "123456") {
+                prize_I = 4; //对堂
+            }
+            else {
+                var p4_count = 0;//四的个数
+                for (var i = 0; i < point_Array.length; i++) {
+                    if (point_Array[i] == 4) {
+                        p4_count = p4_count + 1;
+                    }
+                }
+
+                //大于等于三个四
+                switch (p4_count) {
+                    case 0:
+                        prize_I = -1;
+                        break;
+                    case 1:
+                        prize_I = 0;
+                        break;
+                    case 2:
+                        prize_I = 1;
+                        break;
+                    case 3: //三个四、三红
+                        prize_I = 3;
+                        break;
+                    case 4: //四个四、四红
+                        prize_I = 5;
+                        break;
+                    case 5: //五个四、五红
+                        prize_I = 7;
+                        break;
+                    case 6: //六个四、红六勃
+                        prize_I = 10;
+                        break;
+                }
+                //alert(p4_count);
+                //少于等于两个四
+                if (p4_count <= 2) {
+                    var res = [];
+                    for (var i = 0; i < point_Array.length; ) {
+                        var count = 0;
+                        for (var j = i; j < point_Array.length; j++) {
+                            if (point_Array[i] == point_Array[j]) {
+                                count++;
+                            }
+                        }
+                        res.push(count);
+                        i += count;
+                    }
+                    res.reverse();
+                    var no_p4_count = res[0];
+                    switch (no_p4_count) {
+                        case 4: //四个除4以外的数、四进
+                            prize_I = 2;
+                            break;
+                        case 5: //五个除4以外的数、五子
+                            prize_I = 6;
+                            break;
+                        case 6: //六个2、3、5、6
+                            prize_I = 8;
+                            break;
+                        default:
+                            prize_I = prize_I;
+                            break;
+                    }
+                }
+            }
+
+            if (prize_I >= 0) {
+                prize_Title = prize[prize_I].title;
+                prize_Name = prize[prize_I].name;
+                prize_Score = prize[prize_I].score;
+            }
+            else {
+                prize_Title = "再接再厉";
+                prize_Name = "";
+                prize_Score = 0;
+            }
+            audio.play();
+
+            $('.dice').addClass('active');
+            var ttt = setTimeout(function () {
+                setDice(result);
+            }, 200);
+
+            setTimeout(function () {
+                $('.result').show();
+                $('.result').find('.icon').children('img').attr('src', 'images/fd.png');
+
+                if (result != "") {
+                    $('.result-tx').html(prize_Name + "[" + prize_Title + "] （" + prize_Score + " 分）");
+                } else {
+                    $('.result-tx').html("好可惜~没能博中");
+                }
+                $('.dice').removeClass('active');
+                //处理摇完的前端显示数据
+                //处理总积分、2个次数等
+                var $times = $('em#times');
+                var $credits = $('em#credits');
+                var $count = $('b#count');
+                $times.html(Number($times.html()) + 1);
+                $credits.html(Number($credits.html()) + parseInt(prize_Score));
+                $count.html($count.html() > 0 ? ($count.html() - 1) : 0);
+                flag = 0;
+            }, 1100);
+        }
+
+        //点击事件
+        var $yaosaizi = $('#yao_saizi');
+        $yaosaizi.click(function () {
+            yaoshaizi();
+        });
+
+        //摇一摇事件
+        var SHAKE_THRESHOLD = 1000;
+        var last_update = 0;
+        var x = y = z = last_x = last_y = last_z = 0;
+        if (window.DeviceMotionEvent) {
+            window.addEventListener('devicemotion', function (eventData) {
+                var acceleration = eventData.accelerationIncludingGravity;
+                var curTime = new Date().getTime();
+                if ((curTime - last_update) > 100) {
+                    var diffTime = curTime - last_update;
+                    last_update = curTime;
+                    x = acceleration.x;
+                    y = acceleration.y;
+                    z = acceleration.z;
+                    var speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
+                    if (speed > SHAKE_THRESHOLD && flag == 0) {
+                        yaoshaizi();
+                    }
+                    last_x = x;
+                    last_y = y;
+                    last_z = z;
+                }
+            }, false);
+        }
+    </script>
+</body>
+</html>
